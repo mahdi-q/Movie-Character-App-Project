@@ -1,11 +1,17 @@
 import { HeartIcon } from "@heroicons/react/24/outline";
 
-function Navbar({ numOfResult }) {
+function Navbar({ numOfResult,searchValue, onSearch }) {
   return (
     <nav className="navbar">
       <span className="navbar__logo">Logo 😍</span>
 
-      <input type="text" className="text-field" placeholder="Search ..." />
+      <input
+        type="text"
+        className="text-field"
+        onChange={(e) => onSearch(e)}
+        placeholder="Search ..."
+        value={searchValue}
+      />
 
       <div className="navbar__result">
         Found <strong>{numOfResult}</strong> Result
