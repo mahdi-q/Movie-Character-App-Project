@@ -1,6 +1,7 @@
 import { EyeIcon } from "@heroicons/react/24/outline";
+import Loader from "./Loader";
 
-function CharacterList({ characters, searchValue }) {
+function CharacterList({ characters, searchValue, isLoading }) {
   let filteredCharacters = [];
 
   if (searchValue === "") {
@@ -11,6 +12,14 @@ function CharacterList({ characters, searchValue }) {
         .trim()
         .toLowerCase()
         .includes(searchValue.trim().toLowerCase())
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className="characters-list">
+        <Loader />
+      </div>
     );
   }
 

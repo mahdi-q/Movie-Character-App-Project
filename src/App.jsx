@@ -13,10 +13,16 @@ function App() {
     setSearchValue(value);
   };
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
+    setIsLoading(true);
     fetch("https://rickandmortyapi.com/api/character")
       .then((res) => res.json())
-      .then((data) => setCharacters(data.results));
+      .then((data) => {
+        setCharacters(data.results);
+        setIsLoading(false);
+      });
   }, []);
 
   return (
@@ -28,7 +34,11 @@ function App() {
       />
 
       <div className="main">
-        <CharacterList characters={characters} searchValue={searchValue} />
+        <CharacterList
+          characters={characters}
+          searchValue={searchValue}
+          isLoading={isLoading}
+        />
 
         <CharacterDetail />
       </div>
