@@ -1,3 +1,4 @@
+import toast, { Toaster } from "react-hot-toast";
 import "./App.css";
 import CharacterDetail from "./components/CharacterDetail";
 import CharacterList from "./components/CharacterList";
@@ -17,16 +18,19 @@ function App() {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch("https://rickandmortyapi.com/api/character")
-      .then((res) => res.json())
-      .then((data) => {
-        setCharacters(data.results);
-        setIsLoading(false);
-      });
+    fetch("https://rickandmortyapi.com/api/characters")
+      .then((res) => {
+        if (!res.ok) throw new Error("someting went wrong !!");
+        return res.json();
+      })
+      .then((data) => setCharacters(data.results))
+      .catch((err) => toast.error(err.message))
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
     <div className="app">
+      <Toaster />
       <Navbar
         numOfResult={characters.length}
         searchValue={searchValue}
