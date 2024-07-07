@@ -4,6 +4,7 @@ import CharacterDetail from "./components/CharacterDetail";
 import CharacterList from "./components/CharacterList";
 import Navbar from "./components/Navbar";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -17,15 +18,21 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
-    fetch("https://rickandmortyapi.com/api/characters")
-      .then((res) => {
-        if (!res.ok) throw new Error("someting went wrong !!");
-        return res.json();
-      })
-      .then((data) => setCharacters(data.results))
-      .catch((err) => toast.error(err.message))
-      .finally(() => setIsLoading(false));
+    async function fetchData() {
+      try {
+        setIsLoading(true);
+        const res = await axios.get(
+          "https://rickandmortyapi.com/api/character"
+        );
+        setCharacters(res.data.results);
+      } catch (err) {
+        toast.error(err.response.data.error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchData();
   }, []);
 
   return (
