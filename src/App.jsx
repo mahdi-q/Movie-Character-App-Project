@@ -22,18 +22,24 @@ function App() {
       try {
         setIsLoading(true);
         const res = await axios.get(
-          "https://rickandmortyapi.com/api/character"
+          `https://rickandmortyapi.com/api/character?name=${searchValue}`
         );
         setCharacters(res.data.results);
       } catch (err) {
+        setCharacters([]);
         toast.error(err.response.data.error);
       } finally {
         setIsLoading(false);
       }
     }
 
+    if (searchValue.length < 3) {
+      setCharacters([]);
+      return;
+    }
+
     fetchData();
-  }, []);
+  }, [searchValue]);
 
   return (
     <div className="app">
@@ -45,11 +51,7 @@ function App() {
       />
 
       <div className="main">
-        <CharacterList
-          characters={characters}
-          searchValue={searchValue}
-          isLoading={isLoading}
-        />
+        <CharacterList characters={characters} isLoading={isLoading} />
 
         <CharacterDetail />
       </div>
