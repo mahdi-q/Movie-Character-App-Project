@@ -8,19 +8,27 @@ import axios from "axios";
 
 function App() {
   const [characters, setCharacters] = useState([]);
-
   const [searchValue, setSearchValue] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
+  const [favourites, setFavourites] = useState([]);
+
   const handleSearch = (e) => {
     const value = e.target.value;
     setSearchValue(value);
   };
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [selectedId, setSelectedId] = useState(null);
   const handleSelectedCharacter = (id) => {
     setSelectedId((prevId) => (prevId === id ? null : id));
   };
+
+  const handleAddFavourite = (char) => {
+    setFavourites((prevFav) => [...prevFav, char]);
+  };
+
+  const isAddedToFavourites = favourites
+    .map((fav) => fav.id)
+    .includes(selectedId);
 
   useEffect(() => {
     async function fetchData() {
@@ -53,6 +61,7 @@ function App() {
         numOfResult={characters.length}
         searchValue={searchValue}
         onSearch={handleSearch}
+        numOfFavourites={favourites.length}
       />
 
       <div className="main">
@@ -63,7 +72,12 @@ function App() {
           selectedId={selectedId}
         />
 
-        <CharacterDetail selectedId={selectedId} characters={characters} />
+        <CharacterDetail
+          selectedId={selectedId}
+          characters={characters}
+          onAddFavourite={handleAddFavourite}
+          isAddedToFavourites={isAddedToFavourites}
+        />
       </div>
     </div>
   );

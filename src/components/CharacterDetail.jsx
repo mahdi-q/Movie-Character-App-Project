@@ -4,7 +4,12 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Loader from "./Loader";
 
-function CharacterDetail({ selectedId, characters }) {
+function CharacterDetail({
+  selectedId,
+  characters,
+  onAddFavourite,
+  isAddedToFavourites,
+}) {
   const [character, setCharacter] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [episodes, setEpisodes] = useState([]);
@@ -55,7 +60,11 @@ function CharacterDetail({ selectedId, characters }) {
 
   return (
     <div style={{ flex: 1 }}>
-      <CharacterInfo character={character} />
+      <CharacterInfo
+        character={character}
+        onAddFavourite={onAddFavourite}
+        isAddedToFavourites={isAddedToFavourites}
+      />
       <CharacterEpisodes episodes={episodes} />
     </div>
   );
@@ -63,7 +72,7 @@ function CharacterDetail({ selectedId, characters }) {
 
 export default CharacterDetail;
 
-function CharacterInfo({ character }) {
+function CharacterInfo({ character, onAddFavourite, isAddedToFavourites }) {
   return (
     <div className="character-info">
       <img
@@ -91,7 +100,16 @@ function CharacterInfo({ character }) {
         </div>
 
         <div className="actions">
-          <button className="btn btn--primary">Add To Favorite</button>
+          {isAddedToFavourites ? (
+            <p>Already added to favourites ✔</p>
+          ) : (
+            <button
+              className="btn btn--primary"
+              onClick={() => onAddFavourite(character)}
+            >
+              Add To Favorite
+            </button>
+          )}
         </div>
       </div>
     </div>
