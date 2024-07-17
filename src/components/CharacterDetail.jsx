@@ -1,18 +1,63 @@
 import { ArrowUpCircleIcon } from "@heroicons/react/20/solid";
-import { character, episodes } from "../../data/data";
+import { episodes } from "../../data/data";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import Loader from "./Loader";
 
-function CharacterDetail() {
+function CharacterDetail({ selectedId, characters }) {
+  const [character, setCharacter] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setIsLoading(true);
+        const { data } = await axios.get(
+          `https://rickandmortyapi.com/api/character/${selectedId}`
+        );
+        setCharacter(data);
+      } catch (error) {
+        toast.error(error.response.data.error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    if (selectedId) fetchData();
+  }, [selectedId]);
+
+  if (isLoading)
+    return (
+      <div style={{ flex: 1 }}>
+        <Loader />
+      </div>
+    );
+
+  if (characters.length === 0 && (!character || !selectedId))
+    return (
+      <div style={{ flex: 1, color: "var(--slate-300)" }}>
+        Please search a character .
+      </div>
+    );
+
+  if ((!character || !selectedId) && characters.length !== 0)
+    return (
+      <div style={{ flex: 1, color: "var(--slate-300)" }}>
+        Please selecte a character .
+      </div>
+    );
+
   return (
     <div style={{ flex: 1 }}>
-      <CharacterInfo />
-      <CharacterEpisodes />
+      <CharacterInfo character={character} />
+      <CharacterEpisodes episodes={episodes} />
     </div>
   );
 }
 
 export default CharacterDetail;
 
-function CharacterInfo() {
+function CharacterInfo({ character }) {
   return (
     <div className="character-info">
       <img
@@ -47,7 +92,7 @@ function CharacterInfo() {
   );
 }
 
-function CharacterEpisodes() {
+function CharacterEpisodes({ episodes }) {
   return (
     <div className="character-episodes">
       <div className="title">

@@ -17,6 +17,11 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const [selectedId, setSelectedId] = useState(null);
+  const handleSelectedCharacter = (id) => {
+    setSelectedId((prevId) => (prevId === id ? null : id));
+  };
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -51,9 +56,14 @@ function App() {
       />
 
       <div className="main">
-        <CharacterList characters={characters} isLoading={isLoading} />
+        <CharacterList
+          characters={characters}
+          isLoading={isLoading}
+          onSelectedCharacter={handleSelectedCharacter}
+          selectedId={selectedId}
+        />
 
-        <CharacterDetail />
+        <CharacterDetail selectedId={selectedId} characters={characters} />
       </div>
     </div>
   );
