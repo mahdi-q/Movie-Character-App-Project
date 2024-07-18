@@ -31,16 +31,24 @@ function App() {
     .includes(selectedId);
 
   useEffect(() => {
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
+
     async function fetchData() {
       try {
         setIsLoading(true);
         const res = await axios.get(
-          `https://rickandmortyapi.com/api/character?name=${searchValue}`
+          `https://rickandmortyapi.com/api/character?name=${searchValue}`,
+          { cancelToken: source.token }
         );
-        setCharacters(res.data.results);
+        setCharacters(res.data.results.slice(0, 3));
       } catch (err) {
-        setCharacters([]);
-        toast.error(err.response.data.error);
+        if (axios.isCancel(err)) {
+          console.log("successfully aborted");
+        } else {
+          setCharacters([]);
+          toast.error(err.response.data.error);
+        }
       } finally {
         setIsLoading(false);
       }
@@ -52,6 +60,10 @@ function App() {
     }
 
     fetchData();
+
+    return () => {
+      source.cancel();
+    };
   }, [searchValue]);
 
   return (
