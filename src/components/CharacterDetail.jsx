@@ -117,17 +117,34 @@ function CharacterInfo({ character, onAddFavourite, isAddedToFavourites }) {
 }
 
 function CharacterEpisodes({ episodes }) {
+  const [sortBy, setSortBy] = useState(true);
+
+  let sortedEpisodes;
+
+  if (sortBy) {
+    sortedEpisodes = [...episodes].sort(
+      (a, b) => new Date(a.created) - new Date(b.created)
+    );
+  } else {
+    sortedEpisodes = [...episodes].sort(
+      (a, b) => new Date(b.created) - new Date(a.created)
+    );
+  }
+
   return (
     <div className="character-episodes">
       <div className="title">
         <h2>List of Episodes:</h2>
-        <button className="icon">
-          <ArrowUpCircleIcon />
+        <button onClick={() => setSortBy((is) => !is)}>
+          <ArrowUpCircleIcon
+            className="icon"
+            style={{ rotate: sortBy ? "0deg" : "180deg" }}
+          />
         </button>
       </div>
 
       <ul>
-        {episodes.map((item, index) => (
+        {sortedEpisodes.map((item, index) => (
           <li key={item.id}>
             <div>
               <span>
