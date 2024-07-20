@@ -11,7 +11,9 @@ function App() {
   const [searchValue, setSearchValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
-  const [favourites, setFavourites] = useState([]);
+  const [favourites, setFavourites] = useState(
+    () => JSON.parse(localStorage.getItem("Favourites")) || []
+  );
 
   const handleSearch = (e) => {
     const value = e.target.value;
@@ -69,6 +71,10 @@ function App() {
       source.cancel();
     };
   }, [searchValue]);
+
+  useEffect(() => {
+    localStorage.setItem("Favourites", JSON.stringify(favourites));
+  }, [favourites]);
 
   return (
     <div className="app">
