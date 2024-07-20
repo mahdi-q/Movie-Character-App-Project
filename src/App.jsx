@@ -26,6 +26,10 @@ function App() {
     setFavourites((prevFav) => [...prevFav, char]);
   };
 
+  const handleDeleteFavourite = (id) => {
+    setFavourites((prevFav) => prevFav.filter((fav) => fav.id !== id));
+  };
+
   const isAddedToFavourites = favourites
     .map((fav) => fav.id)
     .includes(selectedId);
@@ -41,7 +45,7 @@ function App() {
           `https://rickandmortyapi.com/api/character?name=${searchValue}`,
           { cancelToken: source.token }
         );
-        setCharacters(res.data.results.slice(0, 3));
+        setCharacters(res.data.results.slice(0, 6));
       } catch (err) {
         if (axios.isCancel(err)) {
           console.log("successfully aborted");
@@ -73,7 +77,8 @@ function App() {
         numOfResult={characters.length}
         searchValue={searchValue}
         onSearch={handleSearch}
-        numOfFavourites={favourites.length}
+        favourites={favourites}
+        onDeleteFavourite={handleDeleteFavourite}
       />
 
       <div className="main">
