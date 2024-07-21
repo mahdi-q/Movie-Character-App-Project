@@ -20,6 +20,14 @@ body {
   min-height: 100vh;
   background-color: var(--slate-900);
 }
+body::-webkit-scrollbar {
+  width: 5px;
+}
+body::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #9ca3af;
+}
+
 button {
   background-color: transparent;
   cursor: pointer;

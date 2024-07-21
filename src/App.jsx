@@ -47,7 +47,7 @@ function App() {
           `https://rickandmortyapi.com/api/character?name=${searchValue}`,
           { cancelToken: source.token }
         );
-        setCharacters(res.data.results.slice(0, 6));
+        setCharacters(res.data.results);
       } catch (err) {
         if (axios.isCancel(err)) {
           console.log("successfully aborted");
