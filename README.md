@@ -53,6 +53,7 @@ This project explores several important concepts from the React library and JS:
 - **useEffect Hook**: Manage side effects in functional components using the useEffect hook.
 - **Clean Up Data Fetching**: Properly cancel API requests and clean up resources.
 - **Local Storage**: Store and retrieve data in the browser's local storage.
+- **Custom Hook**: Reusable function that encapsulates logic using hooks.
 
 ## Packages
 

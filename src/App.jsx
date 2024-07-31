@@ -10,11 +10,9 @@ import useLocalStorage from "./hooks/useLocalStorage";
 function App() {
   const [searchValue, setSearchValue] = useState("");
   const [selectedId, setSelectedId] = useState(null);
-  const [favourites, setFavourites] = useState(
-    () => JSON.parse(localStorage.getItem("Favourites")) || []
-  );
 
   const { characters, isLoading } = useCharacters(searchValue);
+  const [favourites, setFavourites] = useLocalStorage("Favourits", []);
 
   const handleSearch = (e) => {
     const value = e.target.value;
@@ -36,10 +34,6 @@ function App() {
   const isAddedToFavourites = favourites
     .map((fav) => fav.id)
     .includes(selectedId);
-
-  useEffect(() => {
-    localStorage.setItem("Favourites", JSON.stringify(favourites));
-  }, [favourites]);
 
   return (
     <div className="app">
