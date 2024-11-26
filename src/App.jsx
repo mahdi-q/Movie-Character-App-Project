@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import { useState } from "react";
 import useCharacters from "./hooks/useCharacters";
 import useLocalStorage from "./hooks/useLocalStorage";
+import GlobalStyles from "../styles/globalStyles";
 
 function App() {
   const [searchValue, setSearchValue] = useState("");
@@ -37,7 +38,10 @@ function App() {
 
   return (
     <div className="app">
+      <GlobalStyles />
+
       <Toaster />
+
       <Navbar
         numOfResult={characters.length}
         searchValue={searchValue}

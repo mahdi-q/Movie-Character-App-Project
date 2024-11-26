@@ -1,11 +1,3 @@
-#root {
-  margin: 0 auto;
-  max-width: 1280px;
-  min-height: 100vh;
-  position: relative;
-  padding: 2rem;
-}
-
 .navbar {
   display: grid;
   grid-template-columns: 80px 1fr 1fr 80px;
