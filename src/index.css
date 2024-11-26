@@ -83,16 +83,22 @@ button {
 }
 
 .modal {
-  width: 98%;
+  width: 90%;
   min-height: 250px;
+  max-height: 350px;
   position: absolute;
-  top: 50%;
+  top: 25%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--slate-900);
   padding: 1rem;
   border-radius: 1rem;
   box-shadow: 1px 1px 50px var(--slate-600);
+  overflow-y: scroll;
+}
+
+.modal::-webkit-scrollbar {
+  width: 0px;
 }
 
 .modal__header {
@@ -120,6 +126,7 @@ button {
 @media (min-width: 768px) {
   .modal {
     max-width: 30rem;
+    top: 40%;
   }
 }
 
