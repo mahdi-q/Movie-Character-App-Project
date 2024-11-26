@@ -1,6 +1,6 @@
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import styled from "styled-components";
-import Icon from "../../ui/Icon";
+import Icon from "../ui/Icon";
 
 const Backdrop = styled.div`
   width: 100vw;

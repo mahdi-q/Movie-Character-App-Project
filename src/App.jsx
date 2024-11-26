@@ -6,7 +6,7 @@ import Navbar from "./components/Navbar";
 import { useState } from "react";
 import useCharacters from "./hooks/useCharacters";
 import useLocalStorage from "./hooks/useLocalStorage";
-import GlobalStyles from "../styles/globalStyles";
+import GlobalStyles from "./styles/globalStyles";
 
 function App() {
   const [searchValue, setSearchValue] = useState("");

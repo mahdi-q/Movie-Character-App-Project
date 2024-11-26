@@ -3,8 +3,8 @@ import { useState } from "react";
 import Modal from "./Modal";
 import { Character } from "./CharacterList";
 import styled from "styled-components";
-import Icon from "../../ui/Icon";
-import Badge from "../../ui/Badge";
+import Badge from "../ui/Badge";
+import Icon from "../ui/Icon";
 
 const NavbarContainer = styled.nav`
   display: grid;
