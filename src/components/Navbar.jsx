@@ -5,6 +5,7 @@ import { Character } from "./CharacterList";
 import styled from "styled-components";
 import Badge from "../ui/Badge";
 import Icon from "../ui/Icon";
+import ButtonIcon from "../ui/ButtonIcon";
 
 const NavbarContainer = styled.nav`
   display: grid;
@@ -70,15 +71,6 @@ const Favorites = styled.button`
   }
 `;
 
-const DeleteIcon = styled.button`
-  width: 1.6rem;
-  height: 1.6rem;
-  color: var(--rose-500);
-  grid-column: 3/4;
-  grid-row: 1/3;
-  align-self: center;
-`;
-
 function Navbar({
   numOfResult,
   searchValue,
@@ -118,9 +110,9 @@ function Navbar({
       <Modal title={"List Of Favourites"} open={isOpen} onOpen={setIsOpen}>
         {favourites.map((item) => (
           <Character key={item.id} item={item}>
-            <DeleteIcon onClick={() => onDeleteFavourite(item.id)}>
+            <ButtonIcon onClick={() => onDeleteFavourite(item.id)}>
               <TrashIcon />
-            </DeleteIcon>
+            </ButtonIcon>
           </Character>
         ))}
       </Modal>
