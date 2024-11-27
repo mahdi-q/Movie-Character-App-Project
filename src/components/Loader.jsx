@@ -1,7 +1,12 @@
 import React from "react";
+import styled from "styled-components";
+
+const Loading = styled.h4`
+  color: white;
+`;
 
 function Loader() {
-  return <h4 style={{ color: "white" }}>Loading Data ...</h4>;
+  return <Loading>Loading Data ...</Loading>;
 }
 
 export default Loader;

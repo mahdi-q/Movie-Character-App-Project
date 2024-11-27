@@ -7,6 +7,18 @@ import { useState } from "react";
 import useCharacters from "./hooks/useCharacters";
 import useLocalStorage from "./hooks/useLocalStorage";
 import GlobalStyles from "./styles/globalStyles";
+import styled from "styled-components";
+
+const MainHandler = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 2rem;
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
+`;
 
 function App() {
   const [searchValue, setSearchValue] = useState("");
@@ -50,7 +62,7 @@ function App() {
         onDeleteFavourite={handleDeleteFavourite}
       />
 
-      <div className="main">
+      <MainHandler>
         <CharacterList
           characters={characters}
           isLoading={isLoading}
@@ -64,7 +76,7 @@ function App() {
           onAddFavourite={handleAddFavourite}
           isAddedToFavourites={isAddedToFavourites}
         />
-      </div>
+      </MainHandler>
     </div>
   );
 }
