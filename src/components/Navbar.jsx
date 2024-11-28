@@ -1,11 +1,11 @@
 import { HeartIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import Modal from "./Modal";
-import { Character } from "./CharacterList";
 import styled from "styled-components";
 import Badge from "../ui/Badge";
 import Icon from "../ui/Icon";
 import ButtonIcon from "../ui/ButtonIcon";
+import Character from "./Character";
 
 const NavbarContainer = styled.nav`
   display: grid;
