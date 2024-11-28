@@ -6,6 +6,8 @@ import Loader from "./Loader";
 import styled from "styled-components";
 import ListItemStatus from "../ui/ListItemStatus";
 import Button from "../ui/Button";
+import Badge from "../ui/Badge";
+import Icon from "../ui/Icon";
 
 const CharacterInfoContainer = styled.div`
   display: flex;
@@ -71,6 +73,58 @@ const CharacterInfoAction = styled.div`
   @media (min-width: 768px) {
     flex-direction: row;
   }
+`;
+
+const CharacterEpisodesContainer = styled.div`
+  background-color: var(--slate-800);
+  border-radius: 1rem;
+  padding: 1rem;
+  max-height: 387px;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+  &::-webkit-scrollbar-thumb {
+    opacity: 0;
+    visibility: hidden;
+    border-radius: 1rem;
+    background-color: #9ca3af;
+  }
+  &:hover::-webkit-scrollbar-thumb {
+    opacity: 1;
+    visibility: visible;
+  }
+`;
+
+const CharacterEpisodesTitle = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h2 {
+    color: var(--slate-400);
+    margin-bottom: 0.6rem;
+  }
+
+  & > button > .icon {
+    width: 2rem;
+    height: 2rem;
+    transition: all 0.3s ease-in-out;
+    color: var(--slate-300);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`;
+
+const CharacterEpisodesItem = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--slate-200);
+  padding: 0.5rem 0;
 `;
 
 function CharacterDetail({
@@ -200,20 +254,21 @@ function CharacterEpisodes({ episodes }) {
   }
 
   return (
-    <div className="character-episodes">
-      <div className="title">
+    <CharacterEpisodesContainer>
+      <CharacterEpisodesTitle>
         <h2>List of Episodes:</h2>
+
         <button onClick={() => setSortBy((is) => !is)}>
           <ArrowUpCircleIcon
             className="icon"
             style={{ rotate: sortBy ? "0deg" : "180deg" }}
           />
         </button>
-      </div>
+      </CharacterEpisodesTitle>
 
       <ul>
         {sortedEpisodes.map((item, index) => (
-          <li key={item.id}>
+          <CharacterEpisodesItem key={item.id}>
             <div>
               <span>
                 {String(index + 1).padStart(2, 0)} - {item.episode} :
@@ -221,10 +276,10 @@ function CharacterEpisodes({ episodes }) {
               <strong> {item.name}</strong>
             </div>
 
-            <div className="badge badge--secondary">{item.air_date}</div>
-          </li>
+            <Badge varient="secondary">{item.air_date}</Badge>
+          </CharacterEpisodesItem>
         ))}
       </ul>
-    </div>
+    </CharacterEpisodesContainer>
   );
 }

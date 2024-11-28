@@ -1,5 +1,4 @@
 import { Toaster } from "react-hot-toast";
-import "./App.css";
 import CharacterDetail from "./components/CharacterDetail";
 import CharacterList from "./components/CharacterList";
 import Navbar from "./components/Navbar";
