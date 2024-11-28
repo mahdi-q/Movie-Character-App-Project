@@ -2,6 +2,7 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import Loader from "./Loader";
 import styled from "styled-components";
 import ButtonIcon from "../ui/ButtonIcon";
+import ListItemStatus from "../ui/ListItemStatus";
 
 const CharacterListContainer = styled.div`
   width: 45%;
@@ -67,19 +68,6 @@ const ListItemInfo = styled.div`
   grid-row: 2/3;
   align-self: center;
   color: var(--slate-200);
-`;
-
-const ListItemStatus = styled.span`
-  display: inline-block;
-  width: 0.7rem;
-  height: 0.7rem;
-  border-radius: 50%;
-  background-color: ${(props) =>
-    props.color === "red"
-      ? "var(--rose-600)"
-      : props.color === "green"
-      ? "var(--green-600)"
-      : "#000"};
 `;
 
 function CharacterList({
