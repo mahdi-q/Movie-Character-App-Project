@@ -1,6 +1,7 @@
 import { ArrowUpCircleIcon } from "@heroicons/react/20/solid";
 import styled from "styled-components";
 import Badge from "../ui/Badge";
+import { useState } from "react";
 
 const CharacterEpisodesContainer = styled.div`
   background-color: var(--slate-800);
