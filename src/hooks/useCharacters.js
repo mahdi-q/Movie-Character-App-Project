@@ -30,11 +30,6 @@ export default function useCharacters(searchValue) {
       }
     }
 
-    if (searchValue.length < 3) {
-      setCharacters([]);
-      return;
-    }
-
     fetchData();
 
     return () => {

@@ -9,7 +9,6 @@ const ListItem = styled.div`
   background-color: var(--slate-800);
   border-radius: 1rem;
   padding: 0.8rem;
-  cursor: pointer;
   transition: all 0.2s ease-out;
   margin-right: 3px;
 

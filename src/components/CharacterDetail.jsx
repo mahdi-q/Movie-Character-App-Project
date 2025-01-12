@@ -7,7 +7,6 @@ import CharacterEpisodes from "./CharacterEpisodes";
 
 function CharacterDetail({
   selectedId,
-  characters,
   onAddFavourite,
   isAddedToFavourites,
 }) {
@@ -45,16 +44,9 @@ function CharacterDetail({
       </div>
     );
 
-  if (characters.length === 0 && (!character || !selectedId))
+  if (!character || !selectedId)
     return (
-      <div style={{ flex: 1, color: "var(--slate-300)" }}>
-        Please search a character .
-      </div>
-    );
-
-  if ((!character || !selectedId) && characters.length !== 0)
-    return (
-      <div style={{ flex: 1, color: "var(--slate-300)" }}>
+      <div style={{ flex: 1, color: "var(--slate-300)", padding: "1rem" }}>
         Please selecte a character .
       </div>
     );
